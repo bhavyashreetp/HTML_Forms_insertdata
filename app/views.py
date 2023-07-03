@@ -54,9 +54,29 @@ def insert_accessrecord(request):
         AO=AccessRecord.objects.get_or_create(name=WO,date=d,author=au)[0]
         AO.save()
         return HttpResponse('data inserted to accessrecord')
-        
-    
+         
     return render(request,'insert_accessrecord.html',d)
+
+
+def retrieve_webpage(request):
+    topic=Topic.objects.all()
+    d={'topic':topic}
+
+    if request.method=='POST':
+        MSTS=request.POST.getlist('topic')
+        print(MSTS)
+        RWOS=Webpage.objects.none()
+
+        for i in  MSTS:
+            RWOS=RWOS|Webpage.objects.filter(topic_name=i)
+
+        d1={'RWOS':RWOS}
+        return render(request,'display_webpages.html',d1)
+
+
+    return render(request,'retrieve_webpage.html',d)
+
+
 
 
 
