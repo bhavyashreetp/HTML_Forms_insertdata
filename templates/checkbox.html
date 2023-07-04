@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1>checkbox htmlpage</h1>
+        <form method="POST" action="{% url 'retrieve_webpage' %}">
+            {% csrf_token %}
+            {% for to in topic %}
+            <label for="topic">{{to.topic_name}}</label>
+            <input type="checkbox" name="topic" id="topic" value="{{to}}">
+
+            <br> <br>
+
+            
+            {% endfor %}
+            
+            <br> <br>
+            <input type="submit" value="submitcheckbox">
+            
+
+
+        </form>
+    </center>
+    
+</body>
+</html>
